@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    hello {{message}}
+</div>
+
+
+</body>
+<script>
+    var data={counter:0}
+    // 注册组件
+    Vue.component(
+        'wang-component',
+    )
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello'
+        }
+    })
+
+</script>
+</html>

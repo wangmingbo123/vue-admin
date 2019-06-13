@@ -1,14 +1,31 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Main from './views/Main.vue'
-import Table from './views/nav1/Table.vue'
-import Form from './views/nav1/Form.vue'
+import Zhuce from './views/Zhuce.vue'
+
+// 导入自己写的vue
+// component
 import user from './views/nav1/user.vue'
-import Page4 from './views/nav2/Page4.vue'
-import Page5 from './views/nav2/Page5.vue'
-import Page6 from './views/nav3/Page6.vue'
-import echarts from './views/charts/echarts.vue'
+import goods from './views/nav1/goods.vue'
+import category from './views/nav1/category.vue'
+import order from './views/nav1/order.vue'
+import information from './views/nav1/information.vue'
+import sysLog from './views/nav1/log.vue'
+import sysRole from './views/nav1/role.vue'
+import sysPerm from './views/nav1/perm.vue'
+
+import axios from 'axios';
+
+axios.get('/api/getUsers')
+    .then((res) => {
+        var users = res.data.users;
+        var str = JSON.stringify(users)
+        console.log('asdasdasfsa str is ' + str)
+    })
+    .catch((e) => {
+        console.log('asfafafav str is ' + e)
+    })
+
 
 let routes = [
     {
@@ -18,58 +35,39 @@ let routes = [
         hidden: true
     },
     {
+        path: '/zhuce',
+        component: Zhuce,
+        name: '',
+        hidden: true
+    },
+    {
         path: '/404',
         component: NotFound,
         name: '',
         hidden: true
     },
-    //{ path: '/main', component: Main },
     {
         path: '/',
         component: Home,
-        name: '导航一',
+        name: '商城后台',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/table', component: Table, name: 'Table' },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' },
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '导航二',
-        iconCls: 'fa fa-id-card-o',
-        children: [
-            { path: '/page4', component: Page4, name: '页面4' },
-            { path: '/page5', component: Page5, name: '页面5' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-address-card',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/page6', component: Page6, name: '导航三' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: 'Charts',
-        iconCls: 'fa fa-bar-chart',
-        children: [
-            { path: '/echarts', component: echarts, name: 'echarts' }
+            {path: '/user', component: user, name: '用户'},
+            {path: '/goods', component: goods, name: '商品'},
+            {path: '/category', component: category, name: '类别'},
+            {path: '/order', component: order, name: '订单'},
+            {path: '/information', component: information, name: '资讯'},
+            // {path: '/sysLog', component: sysLog, name: '操作日志'},
+            // {path: '/sysRole', component: sysRole, name: '角色管理'},
+            // {path: '/sysPerm', component: sysPerm, name: '权限管理'}
         ]
     },
     {
         path: '*',
         hidden: true,
-        redirect: { path: '/404' }
+        redirect: {path: '/404'}
     }
 ];
 
+// 导出
 export default routes;

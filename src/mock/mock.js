@@ -61,11 +61,21 @@ export default {
 
     //获取用户列表（分页）
     mock.onGet('/user/listpage').reply(config => {
-      let {page, name} = config.params;
+      let {page, name,id} = config.params;
+      // alert('page is '+page)
+      // alert('name is '+name)
       let mockUsers = _Users.filter(user => {
         if (name && user.name.indexOf(name) == -1) return false;
         return true;
       });
+
+      // mockUsers = _Users.filter(user =>{
+      //     // js数组的过滤方法
+      //     console.log('id '+id)
+      //     console.log('user id  '+user.id)
+      //    // if(id&&user.id!=id) return false;
+      //    return true
+      // });
       let total = mockUsers.length;
       mockUsers = mockUsers.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
       return new Promise((resolve, reject) => {
